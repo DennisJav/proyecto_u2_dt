@@ -7,7 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.ec.service.IEstudianteJdbcService;
 import com.uce.ec.service.IPersonaJdbcService;
+import com.uce.ec.to.Estudiante;
 import com.uce.ec.to.Persona;
 
 @SpringBootApplication
@@ -17,6 +19,8 @@ public class ProyectoU2DtApplication implements CommandLineRunner{
 	
 	@Autowired
 	private IPersonaJdbcService iPersonaJdbcService;
+	@Autowired
+	private IEstudianteJdbcService iEstudianteJdbcService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DtApplication.class, args);
@@ -25,29 +29,32 @@ public class ProyectoU2DtApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-//		LOG.info("Metodo Insertar");
-		Persona p=new Persona();
-//		p.setId(3);
-//		p.setNombre("Javier");
-//		p.setApellido("Ortiz");
-//		this.iPersonaJdbcService.crearPersona(p);
-//		LOG.info("Persona insertada: "+p.toString());
-		
-//		LOG.info("Metodo Actualizar");
-//		p.setId(1);
-//		p.setNombre("A");
-//		p.setApellido("B");
-//		this.iPersonaJdbcService.actualizarPersona(p);
-//		LOG.info("Persona actualizada: "+p.toString());
-		
-//		LOG.info("Metodo Eliminar");
-//		int id=1;
-//		this.iPersonaJdbcService.eliminarPersona(id);
-//		LOG.info("Persona de id: "+ id +" Eliminada");
-		
+		LOG.info("Metodo Insertar");
+		Estudiante e=new Estudiante();
+		e.setId(3);
+		e.setNombre("Javier");
+		e.setApellido("Ortiz");
+		e.setCedula("1234");
+		e.setFacultad("Ingenieria");
+//		this.iEstudianteJdbcService.crearEstudiante(e);
+		LOG.info("Estudiante insertado: "+e.toString());
+//		
+		LOG.info("Metodo Actualizar");
+		e.setId(1);
+		e.setNombre("A");
+		e.setApellido("B");
+		e.setCedula("1111");
+		e.setFacultad("Mate");
+		this.iEstudianteJdbcService.actualizarEstudiante(e);
+		LOG.info("Estudiante actualizado: "+e.toString());
+//		
+		LOG.info("Metodo Eliminar");
+		int id=1;
+		this.iEstudianteJdbcService.eliminarEstudiante(id);
+		LOG.info("Estudiante de id: "+ id +" Eliminada");
+//		
 		LOG.info("Metodo Buscar");
-		int id=2;
-		LOG.info("Persona buscada: "+ this.iPersonaJdbcService.buscarPersonaCedula(id));
+		LOG.info("Estudiante buscado: "+ this.iEstudianteJdbcService.buscarEstudiante(2));
 		
 		
 	}
