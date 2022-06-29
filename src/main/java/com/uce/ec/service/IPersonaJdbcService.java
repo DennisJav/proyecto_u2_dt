@@ -1,10 +1,13 @@
 package com.uce.ec.service;
 
-import com.uce.ec.to.Persona;
+import java.util.List;
+
+import com.uce.ec.to.PersonaTo;
 
 public interface IPersonaJdbcService {
-	void crearPersona(Persona persona);
-	Persona buscarPersonaCedula(int id);
+	List<PersonaTo> buscarTodos();
+	void crearPersona(PersonaTo persona);
+	PersonaTo buscarPersonaCedula(int id);
 	void eliminarPersona(int id);
-	void actualizarPersona(Persona persona);
+	void actualizarPersona(PersonaTo persona);
 }

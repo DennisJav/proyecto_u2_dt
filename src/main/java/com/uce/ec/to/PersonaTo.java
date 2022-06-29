@@ -1,7 +1,7 @@
 package com.uce.ec.to;
 
 
-public class Persona {
+public class PersonaTo {
 
 	private int id;
 	private String nombre;
@@ -10,12 +10,12 @@ public class Persona {
 	
 	
 	//Constructor por defecto, va siempre que use un constructor con sus fields o diferente al por defecto
-	public Persona() {
+	public PersonaTo() {
 	
 	}
 
 	//Constructor con todos los atributos para el metodo de Buscar con JDBC
-	public Persona(int id, String nombre, String apellido) {
+	public PersonaTo(int id, String nombre, String apellido) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
