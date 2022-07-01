@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.uce.ec.to.Estudiante;
+import com.uce.ec.to.EstudianteTo;
 import com.uce.ec.to.PersonaTo;
 
 @Repository
@@ -15,7 +15,7 @@ public class EstudianteJdbcRepoImpl implements IEstudianteJdbcRepo {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void crearEstudiante(Estudiante estudiante) {
+	public void crearEstudiante(EstudianteTo estudiante) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update("insert into estudiante (id, nombre, apellido, cedula, facultad) values (?,?,?,?,?)",
 				new Object[] { estudiante.getId(), estudiante.getNombre(), estudiante.getApellido(),
@@ -23,10 +23,10 @@ public class EstudianteJdbcRepoImpl implements IEstudianteJdbcRepo {
 	}
 
 	@Override
-	public Estudiante buscarEstudiante(int id) {
+	public EstudianteTo buscarEstudiante(int id) {
 		// TODO Auto-generated method stub
 		return this.jdbcTemplate.queryForObject("select * from estudiante where id=?", new Object[] { id },
-				new BeanPropertyRowMapper<Estudiante>(Estudiante.class));
+				new BeanPropertyRowMapper<EstudianteTo>(EstudianteTo.class));
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class EstudianteJdbcRepoImpl implements IEstudianteJdbcRepo {
 	}
 
 	@Override
-	public void actualizarEstudiante(Estudiante estudiante) {
+	public void actualizarEstudiante(EstudianteTo estudiante) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update("update estudiante set nombre=?, apellido=?, cedula=?, facultad=? where id=?",
 				new Object[] { estudiante.getNombre(), estudiante.getApellido(), estudiante.getCedula(),

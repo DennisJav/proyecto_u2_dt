@@ -9,8 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.ec.modelo.Estudiante;
 import com.uce.ec.modelo.Persona;
 import com.uce.ec.service.IEstudianteJdbcService;
+import com.uce.ec.service.IEstudianteJpaService;
 import com.uce.ec.service.IPersonaJdbcService;
 import com.uce.ec.service.IPersonaJpaService;
 import com.uce.ec.to.PersonaTo;
@@ -21,7 +23,7 @@ public class ProyectoU2DtApplication implements CommandLineRunner{
 	private static final Logger LOG = LogManager.getLogger( ProyectoU2DtApplication.class);
 	
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IEstudianteJpaService iEstudianteJpaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DtApplication.class, args);
@@ -37,19 +39,21 @@ public class ProyectoU2DtApplication implements CommandLineRunner{
 		
 		LOG.info("Metodos CRUD JPA ");
 		LOG.info("--------------CREAR-----------------");
-		Persona p=new Persona();
-		p.setNombre("Dennis");
-		p.setApellido("Tapia");
-		this.iPersonaJpaService.crearPersona(p);
-		LOG.info("Persona Creada: "+p);
+		Estudiante e=new Estudiante();
+		e.setNombre("Javier");
+		e.setApellido("Tapia");
+		e.setCedula("123");
+		e.setFacultad("ingenieria");
+		this.iEstudianteJpaService.crearEstudiante(e);
+		LOG.info("Persona Creada: "+e);
 		LOG.info("--------------BUSCAR-----------------");
-		LOG.info("Persona Buscada: "+this.iPersonaJpaService.buscarPersonaCedula(2));
+		LOG.info("Persona Buscada: "+this.iEstudianteJpaService.buscarEstudiante(2));
 		LOG.info("--------------ACTUALIZAR-----------------");
-		p.setId(2);
-		p.setNombre("Javier");
-		//this.iPersonaJpaService.actualizarPersona(p);
+		e.setId(1);
+		e.setNombre("Javier");
+		this.iEstudianteJpaService.actualizarEstudiante(e);
 		LOG.info("--------------ELIMINAR-----------------");
-		//this.iPersonaJpaService.eliminarPersona(1);
+		this.iEstudianteJpaService.eliminarEstudiante(1);
 	}
 
 }

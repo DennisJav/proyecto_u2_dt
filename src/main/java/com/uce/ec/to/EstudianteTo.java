@@ -1,6 +1,6 @@
 package com.uce.ec.to;
 
-public class Estudiante {
+public class EstudianteTo {
 
 	private int id;
 	private String nombre;
@@ -11,11 +11,11 @@ public class Estudiante {
 	
 	
 	
-	public Estudiante() {
+	public EstudianteTo() {
 	
 	}
 	
-	public Estudiante(int id, String nombre, String apellido, String cedula, String facultad) {
+	public EstudianteTo(int id, String nombre, String apellido, String cedula, String facultad) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
