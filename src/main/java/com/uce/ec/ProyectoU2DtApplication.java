@@ -24,6 +24,8 @@ public class ProyectoU2DtApplication implements CommandLineRunner{
 	
 	@Autowired
 	private IEstudianteJpaService iEstudianteJpaService;
+	@Autowired
+	private IPersonaJpaService iPersonaJpaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DtApplication.class, args);
@@ -33,27 +35,22 @@ public class ProyectoU2DtApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-//		LOG.info("Metodo buscar todos");
-//		List<PersonaTo> listaPersonas= this.iPersonaJdbcService.buscarTodos();
-//		LOG.info(listaPersonas.toString());
-		
 		LOG.info("Metodos CRUD JPA ");
 		LOG.info("--------------CREAR-----------------");
-		Estudiante e=new Estudiante();
-		e.setNombre("Javier");
-		e.setApellido("Tapia");
-		e.setCedula("123");
-		e.setFacultad("ingenieria");
-		this.iEstudianteJpaService.crearEstudiante(e);
+		Persona e=new Persona();
+		e.setNombre("Antonio");
+		e.setApellido("Ortiz");
+
+		this.iPersonaJpaService.crearPersona(e);
 		LOG.info("Persona Creada: "+e);
 		LOG.info("--------------BUSCAR-----------------");
-		LOG.info("Persona Buscada: "+this.iEstudianteJpaService.buscarEstudiante(2));
+		//LOG.info("Persona Buscada: "+this.iPersonaJpaService.buscarPersonaCedula(2));
 		LOG.info("--------------ACTUALIZAR-----------------");
 		e.setId(1);
 		e.setNombre("Javier");
-		this.iEstudianteJpaService.actualizarEstudiante(e);
+		//this.iPersonaJpaService.actualizarPersona(e);
 		LOG.info("--------------ELIMINAR-----------------");
-		this.iEstudianteJpaService.eliminarEstudiante(1);
+		//this.iPersonaJpaService.eliminarPersona(1);
 	}
 
 }
