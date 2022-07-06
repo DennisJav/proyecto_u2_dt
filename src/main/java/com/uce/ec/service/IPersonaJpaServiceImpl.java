@@ -1,5 +1,7 @@
 package com.uce.ec.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class IPersonaJpaServiceImpl implements IPersonaJpaService{
 	}
 
 	@Override
-	public Persona buscarPersonaCedula(Integer id) {
+	public Persona buscarPersona(Integer id) {
 		// TODO Auto-generated method stub
 		return this.personaJpaRepo.buscarPersonaCedula(id);
 	}
@@ -34,6 +36,18 @@ public class IPersonaJpaServiceImpl implements IPersonaJpaService{
 	public void actualizarPersona(Persona persona) {
 		// TODO Auto-generated method stub
 		this.personaJpaRepo.actualizarPersona(persona);
+	}
+
+	@Override
+	public Persona buscarCedula(String cedula) {
+		// TODO Auto-generated method stub
+		return this.personaJpaRepo.buscarCedula(cedula);
+	}
+
+	@Override
+	public List<Persona> buscarApellido(String apellido) {
+		// TODO Auto-generated method stub
+		return this.personaJpaRepo.buscarApellido(apellido);
 	}
 	
 	
