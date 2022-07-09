@@ -12,4 +12,6 @@ public interface IPersonaJpaService {
 	void actualizarPersona(Persona persona);
 	Persona buscarCedula(String cedula);
 	List<Persona> buscarApellido(String apellido);
+	int actualizarPorApellido(String genero, String apellido);
+	int eliminarPorGenero(String genero);
 }
