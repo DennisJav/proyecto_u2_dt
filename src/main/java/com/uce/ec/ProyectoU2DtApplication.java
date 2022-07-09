@@ -35,32 +35,37 @@ public class ProyectoU2DtApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		LOG.info("Metodos CRUD JPA ");
-		LOG.info("--------------CREAR-----------------");
-		Persona e=new Persona();
-		e.setNombre("Antonio");
-		e.setApellido("Ortiz");
-		e.setCedula("123");
-		//this.iPersonaJpaService.crearPersona(e);
-		LOG.info("Persona Creada: "+e);
-		LOG.info("--------------BUSCAR POR ID-----------------");
-		//LOG.info("Persona Buscada: "+this.iPersonaJpaService.buscarPersona(2));
-		LOG.info("--------------ACTUALIZAR-----------------");
-		e.setId(1);
-		e.setNombre("Javier");
-		//this.iPersonaJpaService.actualizarPersona(e);
-		LOG.info("--------------ELIMINAR-----------------");
-		//this.iPersonaJpaService.eliminarPersona(1);
-		LOG.info("--------------BUSCAR POR CEDULA-----------------");
-		LOG.info("Persona Buscada: "+this.iPersonaJpaService.buscarCedula("123"));
-		LOG.info("--------------BUSCAR POR APELLIDO-----------------");
+//		LOG.info("Metodos CRUD JPA ");
+//		LOG.info("--------------CREAR-----------------");
+//		Persona e=new Persona();
+//		e.setNombre("Antonio");
+//		e.setApellido("Imba");
+//		e.setCedula("123");
+//		e.setGenero("F");
+//		this.iPersonaJpaService.crearPersona(e);
+//		LOG.info("Persona Creada: "+e);
+//		LOG.info("--------------BUSCAR POR ID-----------------");
+//		//LOG.info("Persona Buscada: "+this.iPersonaJpaService.buscarPersona(2));
+//		LOG.info("--------------ACTUALIZAR-----------------");
+//		e.setId(1);
+//		e.setNombre("Javier");
+//		//this.iPersonaJpaService.actualizarPersona(e);
+//		LOG.info("--------------ELIMINAR-----------------");
+//		//this.iPersonaJpaService.eliminarPersona(1);
+//		LOG.info("--------------BUSCAR POR CEDULA-----------------");
+//		LOG.info("Persona Buscada: "+this.iPersonaJpaService.buscarCedula("123"));
+//		LOG.info("--------------BUSCAR POR APELLIDO-----------------");
 		
-		List<Persona> listaPersonas = this.iPersonaJpaService.buscarApellido("Ortiz");
-		for(Persona per: listaPersonas) {
-			LOG.info("Personas Buscadas: "+per);
-		}
+//		List<Persona> listaPersonas = this.iPersonaJpaService.buscarApellido("Ortiz");
+//		for(Persona per: listaPersonas) {
+//			LOG.info("Personas Buscadas: "+per);
+//		}
+//		
 		
+//		this.iPersonaJpaService.actualizarPorApellido("M", "Imba");
 		
+		int i=this.iPersonaJpaService.eliminarPorGenero("F");
+		LOG.info("Eliminados: "+i);
 	}
 
 }

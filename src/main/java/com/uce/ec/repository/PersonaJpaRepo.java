@@ -54,7 +54,7 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 				Persona.class);
 		jpqlQuery.setParameter("valoruno", cedula);
 		return (Persona) jpqlQuery.getSingleResult();
-	
+
 	}
 
 	@Override
@@ -63,7 +63,49 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 				Persona.class);
 		jpqlQuery.setParameter("valoruno", apellido);
 
-		return  jpqlQuery.getResultList();
+		return jpqlQuery.getResultList();
 	}
 
+	@Override
+	public List<Persona> buscarGenero(String genero) {
+		Query jpqlQuery = this.entityManager.createQuery("select p from Persona p where p.genero = :valoruno",
+				Persona.class);
+		jpqlQuery.setParameter("valoruno", genero);
+
+		return jpqlQuery.getResultList();
+	}
+
+	@Override
+	public List<Persona> buscarNombre(String nombre) {
+		Query jpqlQuery = this.entityManager.createQuery("select p from Persona p where p.nombre = :valoruno",
+				Persona.class);
+		jpqlQuery.setParameter("valoruno", nombre);
+
+		return jpqlQuery.getResultList();
+	}
+
+	@Override
+	public int actualizarPorApellido(String genero, String apellido) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager
+				.createQuery("UPDATE Persona p SET p.genero=:datoGenero WHERE p.apellido=:datoApellido");
+		myQuery.setParameter("datoGenero", genero);
+		myQuery.setParameter("datoApellido", apellido);
+		return myQuery.executeUpdate();
+	}
+
+
+
+	@Override
+	public int eliminarPorGenero(String genero) {
+		// TODO Auto-generated method stub
+		
+		Query myQuery = this.entityManager.createQuery("delete from Persona p where p.genero = :datoGenero");
+		myQuery.setParameter("datoGenero", genero);
+		return myQuery.executeUpdate();
+	
+	}
+
+	
+	
 }
