@@ -61,7 +61,7 @@ public class ProyectoU2DtApplication implements CommandLineRunner{
 //			LOG.info("Personas Buscadas: "+per);
 //		}
 //		
-		
+		//taller 19
 		int o = this.iPersonaJpaService.actualizarPorApellido("M", "Imba");
 		LOG.info("Actualizados: "+o);
 		int i=this.iPersonaJpaService.eliminarPorGenero("F");
