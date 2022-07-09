@@ -25,6 +25,8 @@ public class Persona {
 	private String apellido;
 	@Column(name = "pers_cedula")
 	private String cedula;
+	@Column(name = "pers_genero")
+	private String genero;
 	
 	//set y get
 	public Integer getId() {
@@ -48,6 +50,12 @@ public class Persona {
 	
 	
 	
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 	public String getCedula() {
 		return cedula;
 	}
