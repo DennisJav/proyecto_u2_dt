@@ -66,6 +66,8 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 		return jpqlQuery.getResultList();
 	}
 
+	
+	//tarea 15
 	@Override
 	public List<Persona> buscarGenero(String genero) {
 		Query jpqlQuery = this.entityManager.createQuery("select p from Persona p where p.genero = :valoruno",
@@ -83,6 +85,8 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 
 		return jpqlQuery.getResultList();
 	}
+	
+	//TAREA 15 GENERAR LISTA DE GENERO Y NOMBRE
 
 	@Override
 	public int actualizarPorApellido(String genero, String apellido) {
