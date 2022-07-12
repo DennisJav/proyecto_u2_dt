@@ -1,5 +1,7 @@
 package com.uce.ec.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,43 @@ public class EstudianteJpaServiceImpl implements IEstudianteJpaService{
 	public void actualizarEstudiante(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		this.estudianteJpaRepo.actualizarEstudiante(estudiante);
+	}
+
+	@Override
+	public Estudiante buscarEstudianteCedulaTyped(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepo.buscarEstudianteCedulaTyped(cedula);
+	}
+
+	@Override
+	public Estudiante buscarEstudianteCedulaApellidoTyped(String cedula, String apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepo.buscarEstudianteCedulaApellidoTyped(cedula, apellido);
+	}
+
+	@Override
+	public List<Estudiante> buscarEstudianteNombreApellidoNamed(String nombre, String apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepo.buscarEstudianteNombreApellidoNamed(nombre, apellido);
+	}
+
+	@Override
+	public List<Estudiante> buscarEstudianteFacultadNamed(String facultad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepo.buscarEstudianteFacultadNamed(facultad);
+	}
+
+	@Override
+	public List<Estudiante> buscarEstudianteFacultadNombreApellidoNamedTyped(String facultad, String nombre,
+			String apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepo.buscarEstudianteFacultadNombreApellidoNamedTyped(facultad, nombre, apellido);
+	}
+
+	@Override
+	public Estudiante buscarEstudianteCedulaFacultadNamedTyped(String cedula, String facultad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepo.buscarEstudianteCedulaFacultadNamedTyped(cedula, facultad);
 	}
 
 	
