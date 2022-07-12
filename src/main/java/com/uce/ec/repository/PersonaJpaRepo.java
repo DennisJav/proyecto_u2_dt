@@ -3,6 +3,7 @@ package com.uce.ec.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -19,6 +20,9 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	// ejemplo de named query private String query = "select p from Persona p where
+	// p.genero = :valoruno";
 
 	@Override
 	public void crearPersona(Persona persona) {
@@ -56,6 +60,57 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 		return (Persona) jpqlQuery.getSingleResult();
 
 	}
+	
+	
+	
+
+//  METODO USANDO TYPED QUERY	
+	@Override
+	public Persona buscarCedulaTyped(String cedula) {
+		// TODO Auto-generated method stub
+		TypedQuery<Persona> typedQuery = this.entityManager
+				.createQuery("select p from Persona p where p.cedula = :valoruno", Persona.class);
+
+		typedQuery.setParameter("valoruno", cedula);
+		
+		return typedQuery.getSingleResult();
+	}
+
+	// METODO USANDO NAMED QUERY
+	
+	@Override
+	public Persona buscarCedulaNamed(String cedula) {
+		// TODO Auto-generated method stub
+		
+		Query myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedula");
+		myQuery.setParameter("valoruno", cedula);
+		
+		return (Persona) myQuery.getSingleResult();
+	}
+	
+	// METODO USANDO NAMED QUERY CON TYPED QUERY
+	@Override
+	public Persona buscarCedulaTypedNamed(String cedula) {
+		TypedQuery<Persona> myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedula", Persona.class);
+		myQuery.setParameter("valoruno", cedula);
+		
+		return myQuery.getSingleResult();
+	}
+
+	
+	//EJEMPLO MAS DIFICIL
+	
+	@Override
+	public List<Persona> buscarNombreApellido(String nombre, String apellido) {
+		// TODO Auto-generated method stub
+		TypedQuery<Persona> myQuery = this.entityManager.createNamedQuery("Persona.buscarPorNombreApellido", Persona.class);
+		myQuery.setParameter("valoruno", nombre);
+		myQuery.setParameter("valordos", apellido);
+		
+		return myQuery.getResultList();
+	}
+	
+	
 
 	@Override
 	public List<Persona> buscarApellido(String apellido) {
@@ -66,8 +121,7 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 		return jpqlQuery.getResultList();
 	}
 
-	
-	//tarea 15
+	// tarea 15
 	@Override
 	public List<Persona> buscarGenero(String genero) {
 		Query jpqlQuery = this.entityManager.createQuery("select p from Persona p where p.genero = :valoruno",
@@ -85,8 +139,8 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 
 		return jpqlQuery.getResultList();
 	}
-	
-	//TAREA 15 GENERAR LISTA DE GENERO Y NOMBRE
+
+	// TAREA 15 GENERAR LISTA DE GENERO Y NOMBRE
 
 	@Override
 	public int actualizarPorApellido(String genero, String apellido) {
@@ -98,18 +152,21 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 		return myQuery.executeUpdate();
 	}
 
-
-
 	@Override
 	public int eliminarPorGenero(String genero) {
 		// TODO Auto-generated method stub
-		
+
 		Query myQuery = this.entityManager.createQuery("delete from Persona p where p.genero = :datoGenero");
 		myQuery.setParameter("datoGenero", genero);
 		return myQuery.executeUpdate();
-	
+
 	}
 
-	
-	
+
+
+
+
+
+
+
 }
