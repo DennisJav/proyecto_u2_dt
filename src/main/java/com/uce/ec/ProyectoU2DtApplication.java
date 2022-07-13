@@ -69,62 +69,18 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		int i=this.iPersonaJpaService.eliminarPorGenero("F");
 //		LOG.info("Eliminados: "+i);
 //		
-//		TALLER 20 
 
-//		LOG.info("--------------BUSCAR POR CEDULA TYPED-----------------");
-//		LOG.info("BUSQUEDA POR TYPED: " + this.iPersonaJpaService.buscarCedulaNamed("1712"));
-//
-//		LOG.info("--------------BUSCAR POR CEDULA NAMED-----------------");
-//		LOG.info("BUSQUEDA POR NAMED: " + this.iPersonaJpaService.buscarCedulaNamed("1712"));
-//
-//		LOG.info("--------------BUSCAR POR CEDULA TYPED NAMED-----------------");
-//		LOG.info("BUSQUEDA POR TYPED NAMED: " + this.iPersonaJpaService.buscarCedulaTypedNamed("1712"));
-//
-//		LOG.info("--------------BUSCAR POR NOMBRE Y APELLIDO TYPED NAMED-----------------");
-//		LOG.info("BUSQUEDA POR NOMBRE Y APELLIDO SEGUN TYPED NAMED: ");
-//		List<Persona> per = this.iPersonaJpaService.buscarNombreApellido("Dennis", "Tapia");
-//		for (Persona item : per) {
-//			LOG.info("Persona buscada: " + item);
-//		}
+		
+		//TALLER 21
 
-//		TAREA 17
+		LOG.info("--------------BUSCAR POR CEDULA NATIVE-----------------");
+		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarCedulaNative("1712"));
 
-		Estudiante est = new Estudiante();
-		est.setNombre("Dennis");
-		est.setApellido("Tapia");
-		est.setCedula("1721");
-		est.setFacultad("Matematica");
-		// this.iEstudianteJpaService.crearEstudiante(est);
-
-		LOG.info("--------------BUSCAR POR CEDULA TYPED-----------------");
-		LOG.info("Estudiante encontrado: " + this.iEstudianteJpaService.buscarEstudianteCedulaTyped("1721"));
-
-		LOG.info("--------------BUSCAR POR CEDULA Y APELLIDO TYPED-----------------");
-		LOG.info("Estudiante encontrado: "
-				+ this.iEstudianteJpaService.buscarEstudianteCedulaApellidoTyped("1721", "Tapia"));
-
-		LOG.info("--------------BUSCAR POR NOMBRE Y APELLIDO NAMED-----------------");
-		List<Estudiante> listaE = this.iEstudianteJpaService.buscarEstudianteNombreApellidoNamed("Dennis", "Tapia");
-		for (Estudiante item : listaE) {
-			LOG.info("Estudiante buscado: " + item);
-		}
-
-		LOG.info("--------------BUSCAR POR FACULTAD NAMED-----------------");
-		List<Estudiante> listaF = this.iEstudianteJpaService.buscarEstudianteFacultadNamed("ingenieria");
-		for (Estudiante item : listaF) {
-			LOG.info("Estudiante buscado: " + item);
-		}
-
-		LOG.info("--------------BUSCAR POR FACULTAD NOMBRE Y APELLIDO NAMED TYPED-----------------");
-		List<Estudiante> listaG = this.iEstudianteJpaService
-				.buscarEstudianteFacultadNombreApellidoNamedTyped("ingenieria", "Javier", "Tapia");
-		for (Estudiante item : listaF) {
-			LOG.info("Estudiante buscado: " + item);
-		}
-
-		LOG.info("--------------BUSCAR POR CEDULA Y FACULTAD NAMED TYPED-----------------");
-		LOG.info("Estudiante encontrado: "
-				+ this.iEstudianteJpaService.buscarEstudianteCedulaFacultadNamedTyped("1721", "Matematica"));
+		LOG.info("--------------BUSCAR POR CEDULA NAMED NATIVE-----------------");
+		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarCedulaNamedNative("1712"));
+		
+		LOG.info("--------------BUSCAR POR CEDULA CRITERIA API-----------------");
+		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarCedulaCriteriaAPI("1712"));
 
 	}
 

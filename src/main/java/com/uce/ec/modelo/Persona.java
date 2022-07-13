@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
@@ -14,14 +15,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "persona")
+
+//NAMED QUERY
 @NamedQuery(name = "Persona.buscarPorCedula", query = "select p from Persona p where p.cedula = :valoruno")
 @NamedQuery(name = "Persona.buscarPorNombreApellido", query = "select p from Persona p where p.nombre = :valoruno AND p.apellido = :valordos")
-
+//NATIVE QUERY
 //Esta declaracion es antigua 
 //@NamedQueries({
 //	@NamedQuery(name = "Persona.buscarPorCedula", query = "select p from Persona p where p.cedula = :valoruno"),
 //	@NamedQuery(name = "Persona.buscarPorNombreApellido", query = "select p from Persona p where p.nombre = :valoruno AND p.apellido = :valordos")
 //})
+@NamedNativeQuery(name = "Persona.buscarPorCedulaNative", query = "select * from persona where pers_cedula =:valoruno",resultClass = Persona.class)
+//CRITERIA API QUERY
+
 
 public class Persona {
 
