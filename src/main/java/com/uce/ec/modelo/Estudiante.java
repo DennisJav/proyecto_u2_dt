@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -15,6 +16,9 @@ import javax.persistence.Table;
 @NamedQuery(name = "Estudiante.buscarFacultadNamed", query = "select e from Estudiante e where e.facultad = :valoruno")
 @NamedQuery(name = "Estudiante.buscarFacultadNombreApellidoTypedNamed", query = "select e from Estudiante e where e.facultad = :valoruno AND e.nombre = :valordos AND e.apellido = :valor")
 @NamedQuery(name = "Estudiante.buscarCedulaFacultadTypedNamed", query = "select e from Estudiante e where e.cedula = :valoruno AND e.facultad = :valordos")
+
+@NamedNativeQuery(name = "Estudiante.buscarPorCedulaNativeNamed", query = "select * from estudiante where cedula =:valoruno",resultClass = Estudiante.class)
+@NamedNativeQuery(name = "Estudiante.buscarPorNombreApellidoNativeNamed", query = "select * from estudiante where nombre =:valoruno AND apellido =:valordos",resultClass = Estudiante.class)
 
 public class Estudiante {
 

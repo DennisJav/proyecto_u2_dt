@@ -90,7 +90,7 @@ public class EstudianteJpaRepoImpl implements IEstudianteJpaRepo {
 		myQuery.setParameter("valoruno", facultad);
 		myQuery.setParameter("valordos", nombre);
 		myQuery.setParameter("valor", apellido);
-		
+
 		return myQuery.getResultList();
 	}
 
@@ -101,6 +101,44 @@ public class EstudianteJpaRepoImpl implements IEstudianteJpaRepo {
 		myQuery.setParameter("valoruno", cedula);
 		myQuery.setParameter("valordos", facultad);
 		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante buscarCedulaApellidoNative(String cedula, String apellido) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery(
+				"select * from estudiante where cedula =:valoruno AND apellido =:valordos", Estudiante.class);
+		myQuery.setParameter("valoruno", cedula);
+		myQuery.setParameter("valordos", apellido);
+		return (Estudiante) myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarApellidoFacultadNative(String apellido, String facultad) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery(
+				"select * from estudiante where apellido =:valoruno AND facultad =:valordos", Estudiante.class);
+		myQuery.setParameter("valoruno", apellido);
+		myQuery.setParameter("valordos", facultad);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public Estudiante buscarCedulaNamedNative(String cedula) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorCedulaNativeNamed",
+				Estudiante.class);
+		myQuery.setParameter("valoruno", cedula);
+		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarNombreApellidoNamedNative(String nombre, String apellido) {
+		TypedQuery<Estudiante> myQuery = this.entityManager
+				.createNamedQuery("Estudiante.buscarPorNombreApellidoNativeNamed", Estudiante.class);
+		myQuery.setParameter("valoruno", nombre);
+		myQuery.setParameter("valordos", apellido);
+		return myQuery.getResultList();
 	}
 
 }

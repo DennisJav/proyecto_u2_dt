@@ -70,17 +70,23 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		LOG.info("Eliminados: "+i);
 //		
 
-		
-		//TALLER 21
+//		Tarea 18
 
-		LOG.info("--------------BUSCAR POR CEDULA NATIVE-----------------");
-		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarCedulaNative("1712"));
-
-		LOG.info("--------------BUSCAR POR CEDULA NAMED NATIVE-----------------");
-		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarCedulaNamedNative("1712"));
-		
-		LOG.info("--------------BUSCAR POR CEDULA CRITERIA API-----------------");
-		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarCedulaCriteriaAPI("1712"));
+		LOG.info("--------------BUSQUEDA NATIVE 1-----------------");
+		LOG.info("Estudiante Buscado: " + this.iEstudianteJpaService.buscarCedulaApellidoNative("1721", "Tapia"));
+		LOG.info("--------------BUSQUEDA NATIVE 2-----------------");
+		List<Estudiante> listaEstudiantes = this.iEstudianteJpaService.buscarApellidoFacultadNative("Tapia",
+				"Matematica");
+		for (Estudiante est : listaEstudiantes) {
+			LOG.info("Estudiantes Buscados: " + est);
+		}
+		LOG.info("--------------BUSQUEDA NAMED NATIVE 1-----------------");
+		LOG.info("Estudiante Buscado: " + this.iEstudianteJpaService.buscarCedulaNamedNative("1721"));
+		LOG.info("--------------BUSQUEDA NAMED NATIVE 2-----------------");
+		List<Estudiante> listaEstudiantes1 = this.iEstudianteJpaService.buscarNombreApellidoNamedNative("Dennis", "Tapia");
+		for (Estudiante est : listaEstudiantes1) {
+			LOG.info("Estudiantes Buscados: " + est);
+		}
 
 	}
 

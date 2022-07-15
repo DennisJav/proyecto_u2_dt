@@ -131,6 +131,8 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 		return (Persona) myQuery.getSingleResult();
 	}
 
+	//NAMED NATIVE
+	
 	@Override
 	public Persona buscarCedulaNamedNative(String cedula) {
 		TypedQuery<Persona> myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedulaNative",

@@ -21,6 +21,16 @@ public interface IEstudianteJpaRepo {
 	List<Estudiante> buscarEstudianteFacultadNombreApellidoNamedTyped(String facultad, String nombre, String apellido);
 
 	Estudiante buscarEstudianteCedulaFacultadNamedTyped(String cedula, String facultad);
+	
+	
+	Estudiante buscarCedulaApellidoNative(String cedula, String apellido);
+	
+	List<Estudiante> buscarApellidoFacultadNative(String apellido, String facultad);
+	
+	Estudiante buscarCedulaNamedNative(String cedula);
+
+	List<Estudiante> buscarNombreApellidoNamedNative(String nombre, String apellido);
+	
 
 	void eliminarEstudiante(Integer id);
 
