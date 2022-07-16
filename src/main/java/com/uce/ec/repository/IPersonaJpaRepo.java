@@ -36,6 +36,8 @@ public interface IPersonaJpaRepo {
 	
 	Persona buscarCedulaCriteriaAPI(String cedula);
 	
+	Persona buscarDinamicamenteCriteriaAPI(String nombre, String apellido, String genero);
+	
 	int actualizarPorApellido(String genero, String apellido);
 
 	int eliminarPorGenero(String genero);

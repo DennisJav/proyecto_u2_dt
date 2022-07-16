@@ -37,11 +37,11 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		
 //		LOG.info("Metodos CRUD JPA ");
 //		LOG.info("--------------CREAR-----------------");
-		Persona e = new Persona();
-//		e.setNombre("Dennis");
-//		e.setApellido("Tapia");
+//		Persona e = new Persona();
+//		e.setNombre("Ronny");
+//		e.setApellido("Marquez");
 //		e.setGenero("M");
-//		e.setCedula("1234435");
+//		e.setCedula("111222");
 //		this.iPersonaJpaService.crearPersona(e);
 //		LOG.info("Persona Creada: "+e);
 //		LOG.info("--------------BUSCAR POR ID-----------------");
@@ -69,25 +69,10 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		int i=this.iPersonaJpaService.eliminarPorGenero("F");
 //		LOG.info("Eliminados: "+i);
 //		
-
-//		Tarea 18
-
-		LOG.info("--------------BUSQUEDA NATIVE 1-----------------");
-		LOG.info("Estudiante Buscado: " + this.iEstudianteJpaService.buscarCedulaApellidoNative("1721", "Tapia"));
-		LOG.info("--------------BUSQUEDA NATIVE 2-----------------");
-		List<Estudiante> listaEstudiantes = this.iEstudianteJpaService.buscarApellidoFacultadNative("Tapia",
-				"Matematica");
-		for (Estudiante est : listaEstudiantes) {
-			LOG.info("Estudiantes Buscados: " + est);
-		}
-		LOG.info("--------------BUSQUEDA NAMED NATIVE 1-----------------");
-		LOG.info("Estudiante Buscado: " + this.iEstudianteJpaService.buscarCedulaNamedNative("1721"));
-		LOG.info("--------------BUSQUEDA NAMED NATIVE 2-----------------");
-		List<Estudiante> listaEstudiantes1 = this.iEstudianteJpaService.buscarNombreApellidoNamedNative("Dennis", "Tapia");
-		for (Estudiante est : listaEstudiantes1) {
-			LOG.info("Estudiantes Buscados: " + est);
-		}
-
+		LOG.info("--------------BUSCAR POR CEDULA CRITERIA API-----------------");
+		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarCedulaCriteriaAPI("1712"));
+		LOG.info("--------------BUSQUEDA DINAMICA CRITERIA API-----------------");
+		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarDinamicamenteCriteriaAPI("Ronny","Marquez","M"));
 	}
 
 }

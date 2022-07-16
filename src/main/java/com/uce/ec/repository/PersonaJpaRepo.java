@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
@@ -131,8 +132,8 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 		return (Persona) myQuery.getSingleResult();
 	}
 
-	//NAMED NATIVE
-	
+	// NAMED NATIVE
+
 	@Override
 	public Persona buscarCedulaNamedNative(String cedula) {
 		TypedQuery<Persona> myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedulaNative",
@@ -146,14 +147,47 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 	public Persona buscarCedulaCriteriaAPI(String cedula) {
 		// TODO Auto-generated method stub
 		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
-
+		// Especificacion del retorno del SQL
 		CriteriaQuery<Persona> myQuery = myBuilder.createQuery(Persona.class);
-		// Root
+		// Aqui se construye el SQL
+
+		// Root Tabla principal (FROM)
+		Root<Persona> personaRoot = myQuery.from(Persona.class);
+		// Las condiciones en criteria api se llaman predicados
+		Predicate p1 = myBuilder.equal(personaRoot.get("cedula"), cedula);
+
+		// Unos los predicados
+//		CriteriaQuery<Persona> myQueryCompleto = myQuery.select(personaRoot).where(p1);
+		myQuery.select(personaRoot).where(p1);
+		// envio el query ya completo
+		TypedQuery<Persona> myQueryFinal = this.entityManager.createQuery(myQuery);
+
+		return myQueryFinal.getSingleResult();
+	}
+
+	// BUSQUEDA DINAMICA CRITERIA API
+	@Override
+	public Persona buscarDinamicamenteCriteriaAPI(String nombre, String apellido, String genero) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Persona> myQuery = myBuilder.createQuery(Persona.class);
+
 		Root<Persona> personaRoot = myQuery.from(Persona.class);
 
-		TypedQuery<Persona> myQueryFinal = this.entityManager
-				.createQuery(myQuery.select(personaRoot).where(myBuilder.equal(personaRoot.get("cedula"), cedula)));
-
+		Predicate p1 = myBuilder.equal(personaRoot.get("apellido"), apellido);
+		Predicate p2 = myBuilder.equal(personaRoot.get("nombre"), nombre);
+		//SIPUEDO PONER EL GENERO
+		//Predicate pg = myBuilder.equal(personaRoot.get("genero"), genero);
+		Predicate p3 = null;
+		//Predicate finalPredicado = null;
+		if (genero.equals("M")) {
+			p3 = myBuilder.and(p1, p2);
+			//finalPredicado = myBuilder.and(p3,pg); // en el anterior le pongo or no and
+		} else {
+			p3 = myBuilder.or(p1, p2);
+		}
+		myQuery.select(personaRoot).where(p3);
+		TypedQuery<Persona> myQueryFinal = this.entityManager.createQuery(myQuery);
 		return myQueryFinal.getSingleResult();
 	}
 
