@@ -191,6 +191,11 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 		return myQueryFinal.getSingleResult();
 	}
 
+	
+	
+	
+	
+	
 	// tarea 15
 	@Override
 	public List<Persona> buscarGenero(String genero) {

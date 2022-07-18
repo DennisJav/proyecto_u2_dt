@@ -32,4 +32,8 @@ public interface IEstudianteJpaService {
 	Estudiante buscarCedulaNamedNative(String cedula);
 
 	List<Estudiante> buscarNombreApellidoNamedNative(String nombre, String apellido);
+	
+	Estudiante buscarEstudianteCriteriaApi(String cedula, String nombre);
+	
+	List<Estudiante> buscarEstudianteListaCriteriaApi(String apellido, String facultad);
 }

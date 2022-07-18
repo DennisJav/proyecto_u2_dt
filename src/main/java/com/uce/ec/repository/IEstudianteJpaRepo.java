@@ -32,6 +32,11 @@ public interface IEstudianteJpaRepo {
 	List<Estudiante> buscarNombreApellidoNamedNative(String nombre, String apellido);
 	
 
+	Estudiante buscarEstudianteCriteriaApi(String cedula, String nombre);
+	
+	List<Estudiante> buscarEstudianteListaCriteriaApi(String apellido, String facultad);
+	
+	
 	void eliminarEstudiante(Integer id);
 
 	void actualizarEstudiante(Estudiante estudiante);

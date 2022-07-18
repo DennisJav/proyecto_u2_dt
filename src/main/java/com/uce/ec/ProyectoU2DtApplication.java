@@ -69,10 +69,10 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		int i=this.iPersonaJpaService.eliminarPorGenero("F");
 //		LOG.info("Eliminados: "+i);
 //		
-		LOG.info("--------------BUSCAR POR CEDULA CRITERIA API-----------------");
-		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarCedulaCriteriaAPI("1712"));
-		LOG.info("--------------BUSQUEDA DINAMICA CRITERIA API-----------------");
-		LOG.info("Persona encontrada: " + this.iPersonaJpaService.buscarDinamicamenteCriteriaAPI("Ronny","Marquez","M"));
+		LOG.info("--------------BUSCAR CRITERIA API 1-----------------");
+		LOG.info("Persona encontrada: " + this.iEstudianteJpaService.buscarEstudianteCriteriaApi("1721", "Dennis"));
+		LOG.info("--------------BUSQUEDA  CRITERIA API 2-----------------");
+		LOG.info("Persona encontrada: " + this.iEstudianteJpaService.buscarEstudianteListaCriteriaApi("Tapia", "ingenieria"));
 	}
 
 }
