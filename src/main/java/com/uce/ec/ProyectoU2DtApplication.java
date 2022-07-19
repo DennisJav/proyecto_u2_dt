@@ -77,12 +77,12 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 		LOG.info("--------------BUSCAR PERSONA SENCILLA-----------------");
 		List<EstudianteSencillo> listaEstudianteSencillo = this.iEstudianteJpaService.consultarCarreraSencilla("ingenieria");
 		for(EstudianteSencillo item : listaEstudianteSencillo) {
-		LOG.info("Persona Sencilla: " + item);
+		LOG.info("Estudiante Sencilla: " + item);
 		}
 		
 		List<EstudianteFacultadCont> listaEstudianteFacultad = this.iEstudianteJpaService.consultarFacultadContadorCont();
 		for(EstudianteFacultadCont item : listaEstudianteFacultad) {
-		LOG.info("Persona Sencilla: " + item);
+		LOG.info("Estudiante Sencilla contador: " + item);
 		}
 		
 		
