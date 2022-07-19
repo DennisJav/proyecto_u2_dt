@@ -15,8 +15,9 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.ec.modelo.Estudiante;
-import com.uce.ec.modelo.PersonaContadorGenero;
-import com.uce.ec.modelo.PersonaSencilla;
+import com.uce.ec.modelo.EstudianteFacultadCont;
+import com.uce.ec.modelo.EstudianteSencillo;
+
 
 @Repository
 @Transactional
@@ -180,5 +181,28 @@ public class EstudianteJpaRepoImpl implements IEstudianteJpaRepo {
 		return myQueryFinal.getResultList();
 	}
 
+	@Override
+	public List<EstudianteSencillo> consultarCarreraSencilla(String facultad) {
+		// TODO Auto-generated method stub
+
+		TypedQuery<EstudianteSencillo> myTypedQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.ec.modelo.EstudianteSencillo(e.nombre, e.apellido, e.facultad) FROM Estudiante e WHERE e.facultad = :valoruno",
+				EstudianteSencillo.class);
+
+		myTypedQuery.setParameter("valoruno", facultad);
+		
+		return myTypedQuery.getResultList();
+	}
+
+	@Override
+	public List<EstudianteFacultadCont> consultarFacultadContadorCont() {
+		// TODO Auto-generated method stub
+		
+		TypedQuery<EstudianteFacultadCont> myTypedQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.ec.modelo.EstudianteFacultadCont(e.facultad,COUNT(e.facultad)) FROM Estudiante e GROUP BY e.facultad",
+				EstudianteFacultadCont.class);
+		
+		return myTypedQuery.getResultList();
+	}
 
 }

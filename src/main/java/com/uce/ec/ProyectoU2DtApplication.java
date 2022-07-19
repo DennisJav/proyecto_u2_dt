@@ -10,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.ec.modelo.Estudiante;
+import com.uce.ec.modelo.EstudianteFacultadCont;
+import com.uce.ec.modelo.EstudianteSencillo;
 import com.uce.ec.modelo.Persona;
 import com.uce.ec.modelo.PersonaContadorGenero;
 import com.uce.ec.modelo.PersonaSencilla;
@@ -73,13 +75,13 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //	
 		
 		LOG.info("--------------BUSCAR PERSONA SENCILLA-----------------");
-		List<PersonaSencilla> listaPersonaSencilla = this.iPersonaJpaService.buscarPorApellidoSencillo("Marquez");
-		for(PersonaSencilla item : listaPersonaSencilla) {
+		List<EstudianteSencillo> listaEstudianteSencillo = this.iEstudianteJpaService.consultarCarreraSencilla("ingenieria");
+		for(EstudianteSencillo item : listaEstudianteSencillo) {
 		LOG.info("Persona Sencilla: " + item);
 		}
 		
-		List<PersonaContadorGenero> listaPersonaGenero = this.iPersonaJpaService.consultarCantidadPorGenero();
-		for(PersonaContadorGenero item : listaPersonaGenero) {
+		List<EstudianteFacultadCont> listaEstudianteFacultad = this.iEstudianteJpaService.consultarFacultadContadorCont();
+		for(EstudianteFacultadCont item : listaEstudianteFacultad) {
 		LOG.info("Persona Sencilla: " + item);
 		}
 		

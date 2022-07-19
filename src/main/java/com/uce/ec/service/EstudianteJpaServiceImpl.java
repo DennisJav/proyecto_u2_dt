@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uce.ec.modelo.Estudiante;
+import com.uce.ec.modelo.EstudianteFacultadCont;
+import com.uce.ec.modelo.EstudianteSencillo;
 import com.uce.ec.repository.IEstudianteJpaRepo;
 
 @Service
@@ -109,6 +111,18 @@ public class EstudianteJpaServiceImpl implements IEstudianteJpaService{
 	public List<Estudiante> buscarEstudianteListaCriteriaApi(String apellido, String facultad) {
 		// TODO Auto-generated method stub
 		return this.estudianteJpaRepo.buscarEstudianteListaCriteriaApi(apellido, facultad);
+	}
+
+	@Override
+	public List<EstudianteSencillo> consultarCarreraSencilla(String facultad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepo.consultarCarreraSencilla(facultad);
+	}
+
+	@Override
+	public List<EstudianteFacultadCont> consultarFacultadContadorCont() {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepo.consultarFacultadContadorCont();
 	}
 
 	
