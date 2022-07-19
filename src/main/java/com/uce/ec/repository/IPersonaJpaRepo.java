@@ -3,6 +3,8 @@ package com.uce.ec.repository;
 import java.util.List;
 
 import com.uce.ec.modelo.Persona;
+import com.uce.ec.modelo.PersonaContadorGenero;
+import com.uce.ec.modelo.PersonaSencilla;
 
 public interface IPersonaJpaRepo {
 
@@ -41,4 +43,8 @@ public interface IPersonaJpaRepo {
 	int actualizarPorApellido(String genero, String apellido);
 
 	int eliminarPorGenero(String genero);
+	
+	List<PersonaSencilla> buscarPorApellidoSencillo(String apellido);
+	
+	List<PersonaContadorGenero> consultarCantidadPorGenero();
 }

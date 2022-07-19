@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.ec.modelo.Estudiante;
+import com.uce.ec.modelo.PersonaContadorGenero;
+import com.uce.ec.modelo.PersonaSencilla;
 
 @Repository
 @Transactional
@@ -148,17 +150,17 @@ public class EstudianteJpaRepoImpl implements IEstudianteJpaRepo {
 	@Override
 	public Estudiante buscarEstudianteCriteriaApi(String cedula, String nombre) {
 		// TODO Auto-generated method stub
-		
+
 		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<Estudiante> myQuery = myBuilder.createQuery(Estudiante.class);
 		Root<Estudiante> estudianteRoot = myQuery.from(Estudiante.class);
-		Predicate p1 = myBuilder.equal(estudianteRoot.get("cedula"),cedula);
-		Predicate p2 = myBuilder.equal(estudianteRoot.get("nombre"),nombre);
-		Predicate p3 = myBuilder.and(p1,p2);
-		
+		Predicate p1 = myBuilder.equal(estudianteRoot.get("cedula"), cedula);
+		Predicate p2 = myBuilder.equal(estudianteRoot.get("nombre"), nombre);
+		Predicate p3 = myBuilder.and(p1, p2);
+
 		myQuery.select(estudianteRoot).where(p3);
 		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
-		
+
 		return myQueryFinal.getSingleResult();
 	}
 
@@ -168,14 +170,15 @@ public class EstudianteJpaRepoImpl implements IEstudianteJpaRepo {
 		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<Estudiante> myQuery = myBuilder.createQuery(Estudiante.class);
 		Root<Estudiante> estudianteRoot = myQuery.from(Estudiante.class);
-		Predicate p1 = myBuilder.equal(estudianteRoot.get("apellido"),apellido);
-		Predicate p2 = myBuilder.equal(estudianteRoot.get("facultad"),facultad);
-		Predicate p3 = myBuilder.and(p1,p2);
-		
+		Predicate p1 = myBuilder.equal(estudianteRoot.get("apellido"), apellido);
+		Predicate p2 = myBuilder.equal(estudianteRoot.get("facultad"), facultad);
+		Predicate p3 = myBuilder.and(p1, p2);
+
 		myQuery.select(estudianteRoot).where(p3);
 		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
-		
+
 		return myQueryFinal.getResultList();
 	}
+
 
 }

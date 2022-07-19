@@ -3,6 +3,8 @@ package com.uce.ec.service;
 import java.util.List;
 
 import com.uce.ec.modelo.Persona;
+import com.uce.ec.modelo.PersonaContadorGenero;
+import com.uce.ec.modelo.PersonaSencilla;
 
 public interface IPersonaJpaService {
 
@@ -37,4 +39,8 @@ public interface IPersonaJpaService {
 	int actualizarPorApellido(String genero, String apellido);
 
 	int eliminarPorGenero(String genero);
+	
+	List<PersonaSencilla> buscarPorApellidoSencillo(String apellido);
+	
+	List<PersonaContadorGenero> consultarCantidadPorGenero();
 }

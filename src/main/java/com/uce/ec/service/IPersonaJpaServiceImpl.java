@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uce.ec.modelo.Persona;
+import com.uce.ec.modelo.PersonaContadorGenero;
+import com.uce.ec.modelo.PersonaSencilla;
 import com.uce.ec.repository.IPersonaJpaRepo;
 
 @Service
@@ -108,6 +110,18 @@ public class IPersonaJpaServiceImpl implements IPersonaJpaService{
 	public Persona buscarDinamicamenteCriteriaAPI(String nombre, String apellido, String genero) {
 		// TODO Auto-generated method stub
 		return this.personaJpaRepo.buscarDinamicamenteCriteriaAPI(nombre, apellido, genero);
+	}
+
+	@Override
+	public List<PersonaSencilla> buscarPorApellidoSencillo(String apellido) {
+		// TODO Auto-generated method stub
+		return this.personaJpaRepo.buscarPorApellidoSencillo(apellido);
+	}
+
+	@Override
+	public List<PersonaContadorGenero> consultarCantidadPorGenero() {
+		// TODO Auto-generated method stub
+		return this.personaJpaRepo.consultarCantidadPorGenero();
 	}
 	
 	

@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.uce.ec.modelo.Persona;
+import com.uce.ec.modelo.PersonaContadorGenero;
+import com.uce.ec.modelo.PersonaSencilla;
 
 @Repository
 @Transactional
@@ -176,13 +178,13 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 
 		Predicate p1 = myBuilder.equal(personaRoot.get("apellido"), apellido);
 		Predicate p2 = myBuilder.equal(personaRoot.get("nombre"), nombre);
-		//SIPUEDO PONER EL GENERO
-		//Predicate pg = myBuilder.equal(personaRoot.get("genero"), genero);
+		// SIPUEDO PONER EL GENERO
+		// Predicate pg = myBuilder.equal(personaRoot.get("genero"), genero);
 		Predicate p3 = null;
-		//Predicate finalPredicado = null;
+		// Predicate finalPredicado = null;
 		if (genero.equals("M")) {
 			p3 = myBuilder.and(p1, p2);
-			//finalPredicado = myBuilder.and(p3,pg); // en el anterior le pongo or no and
+			// finalPredicado = myBuilder.and(p3,pg); // en el anterior le pongo or no and
 		} else {
 			p3 = myBuilder.or(p1, p2);
 		}
@@ -191,11 +193,6 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 		return myQueryFinal.getSingleResult();
 	}
 
-	
-	
-	
-	
-	
 	// tarea 15
 	@Override
 	public List<Persona> buscarGenero(String genero) {
@@ -235,6 +232,27 @@ public class PersonaJpaRepo implements IPersonaJpaRepo {
 		myQuery.setParameter("datoGenero", genero);
 		return myQuery.executeUpdate();
 
+	}
+
+	@Override
+	public List<PersonaSencilla> buscarPorApellidoSencillo(String apellido) {
+		// TODO Auto-generated method stub
+
+		TypedQuery<PersonaSencilla> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.ec.modelo.PersonaSencilla(p.nombre, p.apellido) FROM Persona p WHERE p.apellido = :datoApellido",
+				PersonaSencilla.class);
+		myQuery.setParameter("datoApellido", apellido);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<PersonaContadorGenero> consultarCantidadPorGenero() {
+		// TODO Auto-generated method stub
+		TypedQuery<PersonaContadorGenero> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.ec.modelo.PersonaContadorGenero(p.genero, COUNT(p.genero)) FROM Persona p GROUP BY p.genero",
+				PersonaContadorGenero.class);
+//		myQuery.setParameter("datoApellido", apellido);
+		return myQuery.getResultList();
 	}
 
 }

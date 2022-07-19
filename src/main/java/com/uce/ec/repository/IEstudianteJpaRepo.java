@@ -3,6 +3,8 @@ package com.uce.ec.repository;
 import java.util.List;
 
 import com.uce.ec.modelo.Estudiante;
+import com.uce.ec.modelo.PersonaContadorGenero;
+import com.uce.ec.modelo.PersonaSencilla;
 
 public interface IEstudianteJpaRepo {
 
@@ -40,5 +42,8 @@ public interface IEstudianteJpaRepo {
 	void eliminarEstudiante(Integer id);
 
 	void actualizarEstudiante(Estudiante estudiante);
+	
+	
+
 
 }

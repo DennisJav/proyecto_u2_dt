@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.ec.modelo.Estudiante;
 import com.uce.ec.modelo.Persona;
+import com.uce.ec.modelo.PersonaContadorGenero;
+import com.uce.ec.modelo.PersonaSencilla;
 import com.uce.ec.service.IEstudianteJdbcService;
 import com.uce.ec.service.IEstudianteJpaService;
 import com.uce.ec.service.IPersonaJdbcService;
@@ -68,11 +70,21 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		LOG.info("Actualizados: "+o);
 //		int i=this.iPersonaJpaService.eliminarPorGenero("F");
 //		LOG.info("Eliminados: "+i);
-//		
-		LOG.info("--------------BUSCAR CRITERIA API 1-----------------");
-		LOG.info("Persona encontrada: " + this.iEstudianteJpaService.buscarEstudianteCriteriaApi("1721", "Dennis"));
-		LOG.info("--------------BUSQUEDA  CRITERIA API 2-----------------");
-		LOG.info("Persona encontrada: " + this.iEstudianteJpaService.buscarEstudianteListaCriteriaApi("Tapia", "ingenieria"));
+//	
+		
+		LOG.info("--------------BUSCAR PERSONA SENCILLA-----------------");
+		List<PersonaSencilla> listaPersonaSencilla = this.iPersonaJpaService.buscarPorApellidoSencillo("Marquez");
+		for(PersonaSencilla item : listaPersonaSencilla) {
+		LOG.info("Persona Sencilla: " + item);
+		}
+		
+		List<PersonaContadorGenero> listaPersonaGenero = this.iPersonaJpaService.consultarCantidadPorGenero();
+		for(PersonaContadorGenero item : listaPersonaGenero) {
+		LOG.info("Persona Sencilla: " + item);
+		}
+		
+		
+		
 	}
 
 }
