@@ -1,5 +1,6 @@
 package com.uce.ec;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,12 +10,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.ec.modelo.Ciudadano;
+import com.uce.ec.modelo.Empleado;
 import com.uce.ec.modelo.Estudiante;
 import com.uce.ec.modelo.EstudianteFacultadCont;
 import com.uce.ec.modelo.EstudianteSencillo;
 import com.uce.ec.modelo.Persona;
 import com.uce.ec.modelo.PersonaContadorGenero;
 import com.uce.ec.modelo.PersonaSencilla;
+import com.uce.ec.service.ICiudadanoService;
+import com.uce.ec.service.IEmpleadoService;
 import com.uce.ec.service.IEstudianteJdbcService;
 import com.uce.ec.service.IEstudianteJpaService;
 import com.uce.ec.service.IPersonaJdbcService;
@@ -30,6 +35,11 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 	private IEstudianteJpaService iEstudianteJpaService;
 	@Autowired
 	private IPersonaJpaService iPersonaJpaService;
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
+	@Autowired
+	private IEmpleadoService empleadoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DtApplication.class, args);
@@ -74,18 +84,33 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		LOG.info("Eliminados: "+i);
 //	
 		
-		LOG.info("--------------BUSCAR PERSONA SENCILLA-----------------");
-		List<EstudianteSencillo> listaEstudianteSencillo = this.iEstudianteJpaService.consultarCarreraSencilla("ingenieria");
-		for(EstudianteSencillo item : listaEstudianteSencillo) {
-		LOG.info("Estudiante Sencilla: " + item);
-		}
+		LOG.info("--------------------INSERTAR ONE TO ONE--------------");
+		Ciudadano c1=new Ciudadano();
+		c1.setApellido("Ortiz");
+		c1.setNombre("Dennis");
 		
-		List<EstudianteFacultadCont> listaEstudianteFacultad = this.iEstudianteJpaService.consultarFacultadContadorCont();
-		for(EstudianteFacultadCont item : listaEstudianteFacultad) {
-		LOG.info("Estudiante Sencilla contador: " + item);
-		}
+		Empleado e1=new Empleado();
+		e1.setCodigoIess("123a");
+		e1.setSalario(new BigDecimal(1000));
+		e1.setCiudadano(c1);
+	
+		c1.setEmpleado(e1);
+		//
+		this.ciudadanoService.crearCiudadano(c1);
 		
 		
+//		Ciudadano c2=new Ciudadano();
+//		c2.setApellido("Ortiz3");
+//		c2.setNombre("Dennis3");
+//		
+//		Empleado e2=new Empleado();
+//		e2.setCodigoIess("123a3");
+//		e2.setSalario(new BigDecimal(1000));
+//		e2.setCiudadano(c2);
+//	
+//		c2.setEmpleado(e2);
+//		//realizar el insertar pero con empleado
+//		this.empleadoService.crearEmpleado(e2);
 		
 	}
 
