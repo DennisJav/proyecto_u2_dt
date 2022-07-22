@@ -1,6 +1,8 @@
 package com.uce.ec;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +17,7 @@ import com.uce.ec.modelo.Empleado;
 import com.uce.ec.modelo.Estudiante;
 import com.uce.ec.modelo.EstudianteFacultadCont;
 import com.uce.ec.modelo.EstudianteSencillo;
+import com.uce.ec.modelo.Pasaporte;
 import com.uce.ec.modelo.Persona;
 import com.uce.ec.modelo.PersonaContadorGenero;
 import com.uce.ec.modelo.PersonaSencilla;
@@ -84,33 +87,41 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		LOG.info("Eliminados: "+i);
 //	
 		
-		LOG.info("--------------------INSERTAR ONE TO ONE--------------");
+		LOG.info("--------------------RELACION ONE TO ONE--------------");
+		LOG.info("--------------------INSERTAR--------------");
 		Ciudadano c1=new Ciudadano();
-		c1.setApellido("Ortiz");
-		c1.setNombre("Dennis");
+		c1.setApellido("Mñoz");
+		c1.setNombre("Javi");
+		c1.setCedula("89");
+		c1.setFechaNacimiento(LocalDateTime.of(1996, Month.JANUARY, 16, 10, 0));
+		
 		
 		Empleado e1=new Empleado();
-		e1.setCodigoIess("123a");
+		e1.setCodigoIess("11254DDE");
 		e1.setSalario(new BigDecimal(1000));
 		e1.setCiudadano(c1);
-	
 		c1.setEmpleado(e1);
+		
+		Pasaporte pas1=new Pasaporte();
+		pas1.setNumero("1123SORN");
+		pas1.setFechaEmision(LocalDateTime.now());
+		pas1.setFechaCaducidad(LocalDateTime.of(2025, Month.JANUARY, 20, 10, 0));
+		pas1.setCiudadano(c1);
+		c1.setPasaporte(pas1);
 		//
 		this.ciudadanoService.crearCiudadano(c1);
+		LOG.info("--------------------BUSCAR--------------");
+		LOG.info("Ciudadano buscada: "+this.ciudadanoService.buscarCiudadano("89"));
 		
+		LOG.info("--------------------ACTUALIZAR--------------");
+		Ciudadano c2=new Ciudadano();
+		c2.setId(21);
+		c2.setApellido("Nuñez12");
+		this.ciudadanoService.actualizarCiudadano(c2);
 		
-//		Ciudadano c2=new Ciudadano();
-//		c2.setApellido("Ortiz3");
-//		c2.setNombre("Dennis3");
-//		
-//		Empleado e2=new Empleado();
-//		e2.setCodigoIess("123a3");
-//		e2.setSalario(new BigDecimal(1000));
-//		e2.setCiudadano(c2);
-//	
-//		c2.setEmpleado(e2);
-//		//realizar el insertar pero con empleado
-//		this.empleadoService.crearEmpleado(e2);
+		LOG.info("--------------------ELIMINAR--------------");
+	//	this.ciudadanoService.eliminarCiudadano(7);
+		
 		
 	}
 

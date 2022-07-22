@@ -17,6 +17,24 @@ public class CiudadanoServiceImpl implements ICiudadanoService{
 		// TODO Auto-generated method stub
 		this.ciudadanoRepo.crearCiudadano(ciudadano);
 	}
+
+	@Override
+	public Ciudadano buscarCiudadano(String cedula) {
+		// TODO Auto-generated method stub
+		return this.ciudadanoRepo.buscarCiudadano(cedula);
+	}
+
+	@Override
+	public void eliminarCiudadano(Integer id) {
+		// TODO Auto-generated method stub
+		this.ciudadanoRepo.eliminarCiudadano(id);
+	}
+
+	@Override
+	public void actualizarCiudadano(Ciudadano ciudadano) {
+		// TODO Auto-generated method stub
+		this.ciudadanoRepo.actualizarCiudadano(ciudadano);
+	}
 	
 	
 
