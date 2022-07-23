@@ -3,7 +3,7 @@ package com.uce.ec.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.ec.modelo.Ciudadano;
+import com.uce.ec.modelo.onetoone.Ciudadano;
 import com.uce.ec.repository.ICiudadanoRepo;
 
 @Service

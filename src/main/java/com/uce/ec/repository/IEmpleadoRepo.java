@@ -1,6 +1,6 @@
 package com.uce.ec.repository;
 
-import com.uce.ec.modelo.Empleado;
+import com.uce.ec.modelo.onetoone.Empleado;
 
 public interface IEmpleadoRepo {
 
