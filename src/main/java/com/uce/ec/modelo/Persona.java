@@ -45,6 +45,10 @@ public class Persona {
 	@Column(name = "pers_genero")
 	private String genero;
 
+	
+	
+	
+	
 	// set y get
 	public Integer getId() {
 		return id;

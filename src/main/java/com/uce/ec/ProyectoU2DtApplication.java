@@ -19,12 +19,16 @@ import com.uce.ec.modelo.EstudianteSencillo;
 import com.uce.ec.modelo.Persona;
 import com.uce.ec.modelo.PersonaContadorGenero;
 import com.uce.ec.modelo.PersonaSencilla;
+import com.uce.ec.modelo.onetomany.Auto;
+import com.uce.ec.modelo.onetomany.Comerciante;
 import com.uce.ec.modelo.onetomany.Habitacion;
 import com.uce.ec.modelo.onetomany.Hotel;
 import com.uce.ec.modelo.onetoone.Ciudadano;
 import com.uce.ec.modelo.onetoone.Empleado;
 import com.uce.ec.modelo.onetoone.Pasaporte;
+import com.uce.ec.service.IAutoService;
 import com.uce.ec.service.ICiudadanoService;
+import com.uce.ec.service.IComercianteService;
 import com.uce.ec.service.IEmpleadoService;
 import com.uce.ec.service.IEstudianteJdbcService;
 import com.uce.ec.service.IEstudianteJpaService;
@@ -53,6 +57,11 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 	private IHotelService hotelService;
 	@Autowired
 	private IHabitacionService habitacionService;
+	
+	@Autowired
+	private IAutoService autoService;
+	@Autowired
+	private IComercianteService comercianteService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DtApplication.class, args);
@@ -132,9 +141,9 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		LOG.info("--------------------ELIMINAR--------------");
 //		this.ciudadanoService.eliminarCiudadano(1);
 //		
-
-		LOG.info("--------------------RELACION ONE TO MANY--------------");
-		LOG.info("--------------------INSERTAR--------------");
+//
+//		LOG.info("--------------------RELACION ONE TO MANY--------------");
+//		LOG.info("--------------------INSERTAR--------------");
 		
 //		Hotel h1=new Hotel();
 //		h1.setNombre("Quito");
@@ -143,25 +152,93 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 		
 		//Buscar un hotel por numero o algun atributo
 		//
-		Hotel hote=new Hotel();
-		hote.setId(1);
-		
-		Habitacion habi1=new Habitacion();
-		habi1.setNumero("A2");
-		habi1.setPiso("1");
-		habi1.setTipo("Normal");
-		habi1.setHotel(hote);
-		this.habitacionService.crearHabitacion(habi1);
-		
-		Habitacion habi2=new Habitacion();
-		habi2.setNumero("A1");
-		habi2.setPiso("1");
-		habi2.setTipo("Matrimonial");
-		habi2.setHotel(hote);
-		this.habitacionService.crearHabitacion(habi2);
+//		Hotel hote=new Hotel();
+//		hote.setId(1);
 //		
-//		List<Habitacion> habitaciones = new ArrayList<>();
-//		habitaciones.
+//		Habitacion habi1=new Habitacion();
+//		habi1.setNumero("A2");
+//		habi1.setPiso("1");
+//		habi1.setTipo("Normal");
+//		habi1.setHotel(hote);
+//		this.habitacionService.crearHabitacion(habi1);
+//		
+//		Habitacion habi2=new Habitacion();
+//		habi2.setNumero("A1");
+//		habi2.setPiso("1");
+//		habi2.setTipo("Matrimonial");
+//		habi2.setHotel(hote);
+//		this.habitacionService.crearHabitacion(habi2);
+////		
+
+		
+		
+
+		LOG.info("--------------------RELACION ONE TO MANY--------------");
+		LOG.info("--------------------INSERTAR--------------");
+		
+
+		Comerciante com=new Comerciante();
+		com.setNombre("Dennis");
+		com.setApellido("Tapia");
+		com.setCedula("12345");
+		com.setAgencia("SUR");
+		
+		Auto a=new Auto();
+		a.setModelo("Toyota");
+		a.setMarca("Corolla");
+		a.setCilindraje("1AS3");
+		a.setPlaca("AAS124");
+		a.setComerciante(com);
+		
+		
+		Auto b=new Auto();
+		b.setModelo("Toyota");
+		b.setMarca("RAV3");
+		b.setCilindraje("1AASS3");
+		b.setPlaca("POS321");
+		b.setComerciante(com);
+		//
+		
+		
+		Auto c=new Auto();
+		c.setModelo("CHERRY");
+		c.setMarca("TIGGO2 ");
+		c.setCilindraje("1SADASD12");
+		c.setPlaca("PPP2323");
+		c.setComerciante(com);
+		//
+		
+		List<Auto> listaAutos=new ArrayList<>();
+		listaAutos.add(a);
+		listaAutos.add(b);
+		listaAutos.add(c);
+		
+		com.setAutos(listaAutos);
+		
+	//	this.comercianteService.crearComerciante(com);
+
+	
+		LOG.info("--------------------ACTUALIZAR--------------");
+		
+		Comerciante com2=new Comerciante();
+		com2.setId(1);
+		com2.setNombre("Dennis");
+		com2.setApellido("Tapia");
+		com2.setCedula("12345asdasd");
+		com2.setAgencia("SUR");
+		//com2.setAutos(listaAutos);
+		//this.comercianteService.actulizarComerciante(com2);
+		
+		
+		LOG.info("--------------------BUSCAR--------------");
+		
+		
+	//	LOG.info( this.autoService.buscarAuto(2));
+		this.comercianteService.buscarComerciante(1);
+		
+		LOG.info("--------------------ELIMINAR--------------");
+		
+		this.comercianteService.eliminarComerciate(1);
 		
 		
 	}
