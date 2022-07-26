@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +21,8 @@ import com.uce.ec.modelo.EstudianteSencillo;
 import com.uce.ec.modelo.Persona;
 import com.uce.ec.modelo.PersonaContadorGenero;
 import com.uce.ec.modelo.PersonaSencilla;
+import com.uce.ec.modelo.manytomany.Autor;
+import com.uce.ec.modelo.manytomany.Libro;
 import com.uce.ec.modelo.onetomany.Auto;
 import com.uce.ec.modelo.onetomany.Comerciante;
 import com.uce.ec.modelo.onetomany.Habitacion;
@@ -34,6 +38,7 @@ import com.uce.ec.service.IEstudianteJdbcService;
 import com.uce.ec.service.IEstudianteJpaService;
 import com.uce.ec.service.IHabitacionService;
 import com.uce.ec.service.IHotelService;
+import com.uce.ec.service.ILibroService;
 import com.uce.ec.service.IPersonaJdbcService;
 import com.uce.ec.service.IPersonaJpaService;
 import com.uce.ec.to.PersonaTo;
@@ -47,7 +52,7 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 	private IEstudianteJpaService iEstudianteJpaService;
 	@Autowired
 	private IPersonaJpaService iPersonaJpaService;
-	
+
 	@Autowired
 	private ICiudadanoService ciudadanoService;
 	@Autowired
@@ -57,12 +62,15 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 	private IHotelService hotelService;
 	@Autowired
 	private IHabitacionService habitacionService;
-	
+
 	@Autowired
 	private IAutoService autoService;
 	@Autowired
 	private IComercianteService comercianteService;
-	
+
+	@Autowired
+	private ILibroService libroService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DtApplication.class, args);
 	}
@@ -144,13 +152,13 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //
 //		LOG.info("--------------------RELACION ONE TO MANY--------------");
 //		LOG.info("--------------------INSERTAR--------------");
-		
+
 //		Hotel h1=new Hotel();
 //		h1.setNombre("Quito");
 //		h1.setDireccion("Colon");
 //		this.hotelService.crearHotel(h1);
-		
-		//Buscar un hotel por numero o algun atributo
+
+		// Buscar un hotel por numero o algun atributo
 		//
 //		Hotel hote=new Hotel();
 //		hote.setId(1);
@@ -169,78 +177,107 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 //		habi2.setHotel(hote);
 //		this.habitacionService.crearHabitacion(habi2);
 ////		
+//
+//		
+//		
+//
+//		LOG.info("--------------------RELACION ONE TO MANY--------------");
+//		LOG.info("--------------------INSERTAR--------------");
+//		
+//
+//		Comerciante com=new Comerciante();
+//		com.setNombre("Dennis");
+//		com.setApellido("Tapia");
+//		com.setCedula("12345");
+//		com.setAgencia("SUR");
+//		
+//		Auto a=new Auto();
+//		a.setModelo("Toyota");
+//		a.setMarca("Corolla");
+//		a.setCilindraje("1AS3");
+//		a.setPlaca("AAS124");
+//		a.setComerciante(com);
+//		
+//		
+//		Auto b=new Auto();
+//		b.setModelo("Toyota");
+//		b.setMarca("RAV3");
+//		b.setCilindraje("1AASS3");
+//		b.setPlaca("POS321");
+//		b.setComerciante(com);
+//		//
+//		
+//		
+//		Auto c=new Auto();
+//		c.setModelo("CHERRY");
+//		c.setMarca("TIGGO2 ");
+//		c.setCilindraje("1SADASD12");
+//		c.setPlaca("PPP2323");
+//		c.setComerciante(com);
+//		//
+//		
+//		List<Auto> listaAutos=new ArrayList<>();
+//		listaAutos.add(a);
+//		listaAutos.add(b);
+//		listaAutos.add(c);
+//		
+//		com.setAutos(listaAutos);
+//		
+//	//	this.comercianteService.crearComerciante(com);
+//
+//	
+//		LOG.info("--------------------ACTUALIZAR--------------");
+//		
+//		Comerciante com2=new Comerciante();
+//		com2.setId(1);
+//		com2.setNombre("Dennis");
+//		com2.setApellido("Tapia");
+//		com2.setCedula("12345asdasd");
+//		com2.setAgencia("SUR");
+//		//com2.setAutos(listaAutos);
+//		//this.comercianteService.actulizarComerciante(com2);
+//		
+//		
+//		LOG.info("--------------------BUSCAR--------------");
+//		
+//		
+//	//	LOG.info( this.autoService.buscarAuto(2));
+//		this.comercianteService.buscarComerciante(1);
+//		
+//		LOG.info("--------------------ELIMINAR--------------");
+//		
+//		this.comercianteService.eliminarComerciate(1);
+//		
 
-		
-		
-
-		LOG.info("--------------------RELACION ONE TO MANY--------------");
+		LOG.info("--------------------RELACION MANY TO MANY--------------");
 		LOG.info("--------------------INSERTAR--------------");
+		Set<Autor> autores = new HashSet<>();
+		Set<Libro> libros = new HashSet<>();
+		Autor autor = new Autor();
+		autor.setNombre("Dennis Javier Tapia");
 		
+		Autor autor2 = new Autor();
+		autor2.setNombre("Dennis Javier Tapia 2");
+		
+		Autor autor3 = new Autor();
+		autor3.setNombre("Dennis Javier Tapia 3");
 
-		Comerciante com=new Comerciante();
-		com.setNombre("Dennis");
-		com.setApellido("Tapia");
-		com.setCedula("12345");
-		com.setAgencia("SUR");
-		
-		Auto a=new Auto();
-		a.setModelo("Toyota");
-		a.setMarca("Corolla");
-		a.setCilindraje("1AS3");
-		a.setPlaca("AAS124");
-		a.setComerciante(com);
-		
-		
-		Auto b=new Auto();
-		b.setModelo("Toyota");
-		b.setMarca("RAV3");
-		b.setCilindraje("1AASS3");
-		b.setPlaca("POS321");
-		b.setComerciante(com);
-		//
-		
-		
-		Auto c=new Auto();
-		c.setModelo("CHERRY");
-		c.setMarca("TIGGO2 ");
-		c.setCilindraje("1SADASD12");
-		c.setPlaca("PPP2323");
-		c.setComerciante(com);
-		//
-		
-		List<Auto> listaAutos=new ArrayList<>();
-		listaAutos.add(a);
-		listaAutos.add(b);
-		listaAutos.add(c);
-		
-		com.setAutos(listaAutos);
-		
-	//	this.comercianteService.crearComerciante(com);
+		Libro libro = new Libro();
+		libro.setTitulo("La culpa es de la vaca 3");
+		libro.setCantidad_paginas(12344);
 
-	
-		LOG.info("--------------------ACTUALIZAR--------------");
 		
-		Comerciante com2=new Comerciante();
-		com2.setId(1);
-		com2.setNombre("Dennis");
-		com2.setApellido("Tapia");
-		com2.setCedula("12345asdasd");
-		com2.setAgencia("SUR");
-		//com2.setAutos(listaAutos);
-		//this.comercianteService.actulizarComerciante(com2);
+		autores.add(autor);
+		autores.add(autor2);
+		autores.add(autor3);
 		
-		
-		LOG.info("--------------------BUSCAR--------------");
-		
-		
-	//	LOG.info( this.autoService.buscarAuto(2));
-		this.comercianteService.buscarComerciante(1);
-		
-		LOG.info("--------------------ELIMINAR--------------");
-		
-		this.comercianteService.eliminarComerciate(1);
-		
-		
+		libros.add(libro);
+
+		libro.setAutores(autores);
+		//autor.setLibros(libros); <--SOlo en la many to many se setea el principal y no el secundarioS
+
+		this.libroService.crearLibro(libro);
+
 	}
 
 }
