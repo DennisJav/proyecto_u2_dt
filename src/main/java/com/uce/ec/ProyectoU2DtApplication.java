@@ -22,7 +22,10 @@ import com.uce.ec.modelo.Persona;
 import com.uce.ec.modelo.PersonaContadorGenero;
 import com.uce.ec.modelo.PersonaSencilla;
 import com.uce.ec.modelo.manytomany.Autor;
+import com.uce.ec.modelo.manytomany.Autor2;
 import com.uce.ec.modelo.manytomany.Libro;
+import com.uce.ec.modelo.manytomany.Libro2;
+import com.uce.ec.modelo.manytomany.Libro2_Autor2;
 import com.uce.ec.modelo.onetomany.Auto;
 import com.uce.ec.modelo.onetomany.Comerciante;
 import com.uce.ec.modelo.onetomany.Habitacion;
@@ -31,6 +34,7 @@ import com.uce.ec.modelo.onetoone.Ciudadano;
 import com.uce.ec.modelo.onetoone.Empleado;
 import com.uce.ec.modelo.onetoone.Pasaporte;
 import com.uce.ec.service.IAutoService;
+import com.uce.ec.service.IAutor2Service;
 import com.uce.ec.service.ICiudadanoService;
 import com.uce.ec.service.IComercianteService;
 import com.uce.ec.service.IEmpleadoService;
@@ -38,6 +42,7 @@ import com.uce.ec.service.IEstudianteJdbcService;
 import com.uce.ec.service.IEstudianteJpaService;
 import com.uce.ec.service.IHabitacionService;
 import com.uce.ec.service.IHotelService;
+import com.uce.ec.service.ILibro2Service;
 import com.uce.ec.service.ILibroService;
 import com.uce.ec.service.IPersonaJdbcService;
 import com.uce.ec.service.IPersonaJpaService;
@@ -71,213 +76,108 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 	@Autowired
 	private ILibroService libroService;
 
+	@Autowired
+	private ILibro2Service libro2Service;
+	
+	@Autowired IAutor2Service autor2Service;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DtApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-//		
-//		LOG.info("Metodos CRUD JPA ");
-//		LOG.info("--------------CREAR-----------------");
-//		Persona e = new Persona();
-//		e.setNombre("Ronny");
-//		e.setApellido("Marquez");
-//		e.setGenero("M");
-//		e.setCedula("111222");
-//		this.iPersonaJpaService.crearPersona(e);
-//		LOG.info("Persona Creada: "+e);
-//		LOG.info("--------------BUSCAR POR ID-----------------");
-//		//LOG.info("Persona Buscada: "+this.iPersonaJpaService.buscarPersona(2));
-//		LOG.info("--------------ACTUALIZAR-----------------");
-//		e.setId(2);
-//		e.setNombre("Dennis");
-//		e.setCedula("1712");
-//		e.setApellido("Tapia");
-//		e.setGenero("M");
-//		this.iPersonaJpaService.actualizarPersona(e);
-//		LOG.info("--------------ELIMINAR-----------------");
-//		//this.iPersonaJpaService.eliminarPersona(1);
-//		LOG.info("--------------BUSCAR POR CEDULA-----------------");
-//		LOG.info("Persona Buscada: "+this.iPersonaJpaService.buscarCedula("123"));
-//		LOG.info("--------------BUSCAR POR APELLIDO-----------------");
-//		
-//		List<Persona> listaPersonas = this.iPersonaJpaService.buscarApellido("Ortiz");
-//		for(Persona per: listaPersonas) {
-//			LOG.info("Personas Buscadas: "+per);
-//		}
-//		
-//		int o = this.iPersonaJpaService.actualizarPorApellido("M", "Imba");
-//		LOG.info("Actualizados: "+o);
-//		int i=this.iPersonaJpaService.eliminarPorGenero("F");
-//		LOG.info("Eliminados: "+i);
-//	
-//		
-//		LOG.info("--------------------RELACION ONE TO ONE--------------");
-//		LOG.info("--------------------INSERTAR--------------");
-//		Ciudadano c1=new Ciudadano();
-//		c1.setApellido("Mñoz");
-//		c1.setNombre("Javi");
-//		c1.setCedula("89");
-//		c1.setFechaNacimiento(LocalDateTime.of(1996, Month.JANUARY, 16, 10, 0));
-//		
-//		
-//		Empleado e1=new Empleado();
-//		e1.setCodigoIess("11254DDE");
-//		e1.setSalario(new BigDecimal(1000));
-//		e1.setCiudadano(c1);
-//		c1.setEmpleado(e1);
-//		
-//		Pasaporte pas1=new Pasaporte();
-//		pas1.setNumero("1123SORN");
-//		pas1.setFechaEmision(LocalDateTime.now());
-//		pas1.setFechaCaducidad(LocalDateTime.of(2025, Month.JANUARY, 20, 10, 0));
-//		pas1.setCiudadano(c1);
-//		c1.setPasaporte(pas1);
-//		//
-//		//this.ciudadanoService.crearCiudadano(c1);
-//		LOG.info("--------------------BUSCAR--------------");
-//	//	LOG.info("Ciudadano buscada: "+this.ciudadanoService.buscarCiudadano("89"));
-//		
-//		LOG.info("--------------------ACTUALIZAR--------------");
-//		Ciudadano c2=new Ciudadano();
-//		//c2.setId(21);
-//	//	c2.setApellido("Nuñez12");
-//	//	this.ciudadanoService.actualizarCiudadano(c2);
-//		
-//		LOG.info("--------------------ELIMINAR--------------");
-//		this.ciudadanoService.eliminarCiudadano(1);
-//		
-//
-//		LOG.info("--------------------RELACION ONE TO MANY--------------");
-//		LOG.info("--------------------INSERTAR--------------");
-
-//		Hotel h1=new Hotel();
-//		h1.setNombre("Quito");
-//		h1.setDireccion("Colon");
-//		this.hotelService.crearHotel(h1);
-
-		// Buscar un hotel por numero o algun atributo
-		//
-//		Hotel hote=new Hotel();
-//		hote.setId(1);
-//		
-//		Habitacion habi1=new Habitacion();
-//		habi1.setNumero("A2");
-//		habi1.setPiso("1");
-//		habi1.setTipo("Normal");
-//		habi1.setHotel(hote);
-//		this.habitacionService.crearHabitacion(habi1);
-//		
-//		Habitacion habi2=new Habitacion();
-//		habi2.setNumero("A1");
-//		habi2.setPiso("1");
-//		habi2.setTipo("Matrimonial");
-//		habi2.setHotel(hote);
-//		this.habitacionService.crearHabitacion(habi2);
-////		
-//
-//		
-//		
-//
-//		LOG.info("--------------------RELACION ONE TO MANY--------------");
-//		LOG.info("--------------------INSERTAR--------------");
-//		
-//
-//		Comerciante com=new Comerciante();
-//		com.setNombre("Dennis");
-//		com.setApellido("Tapia");
-//		com.setCedula("12345");
-//		com.setAgencia("SUR");
-//		
-//		Auto a=new Auto();
-//		a.setModelo("Toyota");
-//		a.setMarca("Corolla");
-//		a.setCilindraje("1AS3");
-//		a.setPlaca("AAS124");
-//		a.setComerciante(com);
-//		
-//		
-//		Auto b=new Auto();
-//		b.setModelo("Toyota");
-//		b.setMarca("RAV3");
-//		b.setCilindraje("1AASS3");
-//		b.setPlaca("POS321");
-//		b.setComerciante(com);
-//		//
-//		
-//		
-//		Auto c=new Auto();
-//		c.setModelo("CHERRY");
-//		c.setMarca("TIGGO2 ");
-//		c.setCilindraje("1SADASD12");
-//		c.setPlaca("PPP2323");
-//		c.setComerciante(com);
-//		//
-//		
-//		List<Auto> listaAutos=new ArrayList<>();
-//		listaAutos.add(a);
-//		listaAutos.add(b);
-//		listaAutos.add(c);
-//		
-//		com.setAutos(listaAutos);
-//		
-//	//	this.comercianteService.crearComerciante(com);
-//
-//	
-//		LOG.info("--------------------ACTUALIZAR--------------");
-//		
-//		Comerciante com2=new Comerciante();
-//		com2.setId(1);
-//		com2.setNombre("Dennis");
-//		com2.setApellido("Tapia");
-//		com2.setCedula("12345asdasd");
-//		com2.setAgencia("SUR");
-//		//com2.setAutos(listaAutos);
-//		//this.comercianteService.actulizarComerciante(com2);
-//		
-//		
-//		LOG.info("--------------------BUSCAR--------------");
-//		
-//		
-//	//	LOG.info( this.autoService.buscarAuto(2));
-//		this.comercianteService.buscarComerciante(1);
-//		
-//		LOG.info("--------------------ELIMINAR--------------");
-//		
-//		this.comercianteService.eliminarComerciate(1);
-//		
+		
 
 		LOG.info("--------------------RELACION MANY TO MANY--------------");
 		LOG.info("--------------------INSERTAR--------------");
-		Set<Autor> autores = new HashSet<>();
-		Set<Libro> libros = new HashSet<>();
-		Autor autor = new Autor();
-		autor.setNombre("Dennis Javier Tapia");
 		
-		Autor autor2 = new Autor();
-		autor2.setNombre("Dennis Javier Tapia 2");
+		List<Autor2> aut=new ArrayList<>(); 
+		List<Libro2> lib=new ArrayList<>();
 		
-		Autor autor3 = new Autor();
-		autor3.setNombre("Dennis Javier Tapia 3");
-
-		Libro libro = new Libro();
-		libro.setTitulo("La culpa es de la vaca 3");
-		libro.setCantidad_paginas(12344);
-
+		Autor2 autor=new Autor2();
+		autor.setNombre("Dennis");
+		aut.add(autor);
 		
-		autores.add(autor);
-		autores.add(autor2);
-		autores.add(autor3);
+//		
+//		Autor2 autor2=new Autor2();
+//		autor2.setNombre("Javier");
+//		aut.add(autor2);
+//		
+		Libro2 libro2=new Libro2();
+		libro2.setCantidad_paginas(123);
+		libro2.setTitulo("asd");
+		lib.add(libro2);
 		
-		libros.add(libro);
-
-		libro.setAutores(autores);
-		//autor.setLibros(libros); <--SOlo en la many to many se setea el principal y no el secundarioS
-
-		this.libroService.crearLibro(libro);
-
+		Libro2 libro22=new Libro2();
+		libro22.setCantidad_paginas(114);
+		libro22.setTitulo("cvcv");
+		lib.add(libro22);
+		
+		
+		Libro2_Autor2  l=new Libro2_Autor2();
+		//l.setAutor2(autor2);
+		l.setAutor2(autor);
+		l.setLibro2(libro2);
+		
+		Libro2_Autor2  l2=new Libro2_Autor2();
+		//l.setAutor2(autor2);
+		l2.setAutor2(autor);
+		l2.setLibro2(libro22);
+		
+		
+		
+		List<Libro2_Autor2> lista=new ArrayList<>();
+		lista.add(l);
+		lista.add(l2);
+	
+		autor.setLibro2_autor2(lista);
+	//	this.autor2Service.crearAutor2(autor);
+		
+		
+		//  1 libro 2 autores
+		
+		List<Autor2> aut1=new ArrayList<>(); 
+		List<Libro2> lib1=new ArrayList<>();
+		
+		//autor 1
+		Autor2 autor3=new Autor2();
+		autor3.setNombre("Dennis");
+		aut1.add(autor3);
+		
+		//autor 2
+		Autor2 autor4=new Autor2();
+		autor4.setNombre("Javier");
+		aut1.add(autor4);
+		// libro
+		Libro2 libro3=new Libro2();
+		libro3.setCantidad_paginas(123);
+		libro3.setTitulo("aasdasdasdasdsd");
+		lib1.add(libro3);
+		
+		
+		
+		Libro2_Autor2  l3=new Libro2_Autor2();
+		//l.setAutor2(autor2);
+		l3.setAutor2(autor3);
+		l3.setLibro2(libro3);
+		
+		Libro2_Autor2  l4=new Libro2_Autor2();
+		//l.setAutor2(autor2);
+		l4.setAutor2(autor4);
+		l4.setLibro2(libro3);
+		
+		
+		
+		List<Libro2_Autor2> lista2=new ArrayList<>();
+		lista2.add(l3);
+		lista2.add(l4);
+	
+		libro3.setLibro2_autor2(lista2);
+		
+		
+		
+		this.libro2Service.crearLibro2(libro3);
 	}
 
 }
