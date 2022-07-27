@@ -15,6 +15,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.ec.cajero.modelo.DetalleFactura;
+import com.uce.ec.cajero.modelo.Factura;
+import com.uce.ec.cajero.service.IFacturaService;
 import com.uce.ec.modelo.Estudiante;
 import com.uce.ec.modelo.EstudianteFacultadCont;
 import com.uce.ec.modelo.EstudianteSencillo;
@@ -81,6 +84,9 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 	
 	@Autowired IAutor2Service autor2Service;
 	
+	@Autowired
+	private IFacturaService facturaService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DtApplication.class, args);
 	}
@@ -89,95 +95,19 @@ public class ProyectoU2DtApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 
-		LOG.info("--------------------RELACION MANY TO MANY--------------");
-		LOG.info("--------------------INSERTAR--------------");
-		
-		List<Autor2> aut=new ArrayList<>(); 
-		List<Libro2> lib=new ArrayList<>();
-		
-		Autor2 autor=new Autor2();
-		autor.setNombre("Dennis");
-		aut.add(autor);
-		
-//		
-//		Autor2 autor2=new Autor2();
-//		autor2.setNombre("Javier");
-//		aut.add(autor2);
-//		
-		Libro2 libro2=new Libro2();
-		libro2.setCantidad_paginas(123);
-		libro2.setTitulo("asd");
-		lib.add(libro2);
-		
-		Libro2 libro22=new Libro2();
-		libro22.setCantidad_paginas(114);
-		libro22.setTitulo("cvcv");
-		lib.add(libro22);
-		
-		
-		Libro2_Autor2  l=new Libro2_Autor2();
-		//l.setAutor2(autor2);
-		l.setAutor2(autor);
-		l.setLibro2(libro2);
-		
-		Libro2_Autor2  l2=new Libro2_Autor2();
-		//l.setAutor2(autor2);
-		l2.setAutor2(autor);
-		l2.setLibro2(libro22);
-		
-		
-		
-		List<Libro2_Autor2> lista=new ArrayList<>();
-		lista.add(l);
-		lista.add(l2);
 	
-		autor.setLibro2_autor2(lista);
-	//	this.autor2Service.crearAutor2(autor);
+		LOG.info("--------------------Buscar--------------");
+		Factura fact = this.facturaService.consultarFactura(1);
+		LOG.info(fact.getNumero());
+		LOG.info(fact.getFecha());
+		LOG.info(fact.getCliente().getNumeroTarjeta());
+		
+		List<DetalleFactura> detalleFacturas = fact.getDetalleFacturas();
+		for(DetalleFactura deta:detalleFacturas) {
+			LOG.info(deta);
+		}
 		
 		
-		//  1 libro 2 autores
-		
-		List<Autor2> aut1=new ArrayList<>(); 
-		List<Libro2> lib1=new ArrayList<>();
-		
-		//autor 1
-		Autor2 autor3=new Autor2();
-		autor3.setNombre("Dennis");
-		aut1.add(autor3);
-		
-		//autor 2
-		Autor2 autor4=new Autor2();
-		autor4.setNombre("Javier");
-		aut1.add(autor4);
-		// libro
-		Libro2 libro3=new Libro2();
-		libro3.setCantidad_paginas(123);
-		libro3.setTitulo("aasdasdasdasdsd");
-		lib1.add(libro3);
-		
-		
-		
-		Libro2_Autor2  l3=new Libro2_Autor2();
-		//l.setAutor2(autor2);
-		l3.setAutor2(autor3);
-		l3.setLibro2(libro3);
-		
-		Libro2_Autor2  l4=new Libro2_Autor2();
-		//l.setAutor2(autor2);
-		l4.setAutor2(autor4);
-		l4.setLibro2(libro3);
-		
-		
-		
-		List<Libro2_Autor2> lista2=new ArrayList<>();
-		lista2.add(l3);
-		lista2.add(l4);
-	
-		libro3.setLibro2_autor2(lista2);
-		
-		
-		
-		this.libro2Service.crearLibro2(libro3);
 	}
 
 }
